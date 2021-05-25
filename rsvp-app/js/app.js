@@ -1,6 +1,7 @@
 // capture input from registrar form
 const form = document.querySelector('#registrar');
 const input = form.querySelector('input');
+const ul = document.querySelector('#invitedList');
 
 form.addEventListener('submit', (e) => {
     // by default, the browser will refresh on submit
@@ -10,7 +11,6 @@ form.addEventListener('submit', (e) => {
     // clears out input after submitting
     input.value = "";
     // adds input and checkbox to a list
-    const ul = document.querySelector('#invitedList');
     const li = document.createElement('li');
     li.textContent = text;
     const label = document.createElement('label');
@@ -22,3 +22,15 @@ form.addEventListener('submit', (e) => {
     ul.appendChild(li);
 });
 
+// changes the list item styling if checkbox checked
+ul.addEventListener('change', (e) => {
+    const checkbox = e.target;
+    const checked = checkbox.checked;
+    const listItem = checkbox.parentNode.parentNode;
+
+    if (checked) {
+        listItem.className = 'responded';
+    } else {
+        listItem.className = '';
+    }
+});
